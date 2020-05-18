@@ -1,0 +1,111 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+
+
+<h3 style="text-align:center;">
+    Contact Student
+</h3>
+<hr>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#received">Received Message</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#sent">Message Sent</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#write">Write Message</a>
+    </li>
+</ul>
+
+  <div class="tab-content">
+    <div id="received" class="container tab-pane active"><br>
+        <h3>Messages From Student</h3>
+        {% if message!=[] %}
+        {% for i in range(message_no) %}
+        <div id="student_message">
+            <table>
+                <tr>
+                    <td style="width:35%;"><h4>Student:</h4></td>
+                    <td><h4>{{message[i][2]}}</h4></td>
+                </tr>
+                <tr>
+                    <td>Time:</td>
+                    <td>{{message[i][1]}}</td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td>{{message[i][0]}}</td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p id="message_no">You have sent any message!</p>
+        {% endif %}
+    </div>
+
+    <div id="sent" class="container tab-pane fade"><br>
+        <h3>Messages sent to Student</h3>
+        {% if received !=[] %}
+        {% for i in range(received_no) %}
+        <div id="sent_message">
+            <table>
+                <tr>
+                    <td style="width:35%;"><h4>From:</h4></td>
+                    <td><h4>{{received[i][2]}}</h4></td>
+                </tr>
+                <tr>
+                    <td>Time:</td>
+                    <td>{{received[i][1]}}</td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td>{{received[i][0]}}</td>
+                </tr>
+            </table>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p id="no_send">You have not sent any message!</p>
+        {% endif %}
+
+    </div>
+
+    <div id="write" class="container tab-pane fade"><br>
+      <h3>Find Teacher</h3>
+        <form action="/write_student_message" method="post">
+            <label for="student_id">Send to: </label>
+            <select name="student_id" id="student_id">
+                    {% for i in range(student_no) %}
+                    <option value="{{student[i][0]}}">
+                        {{student[i][1]}}
+                    </option>
+                    {% endfor %}
+            </select><br>
+
+            <label for="message">Message:</label><br>
+            <textarea rows="5" cols="50" name="message" id="message" required></textarea><br>
+            <button class="btn" type="submit" id="send">Send</button>
+        </form>
+    </div>
+  </div>
+
+<style>
+    #send{
+        margin-top:1%;
+        background-color:#b3b3ff;
+        width: 100%;
+    }
+
+    #student_message, #sent_message,
+    #message_no, #no_send{
+        background-color:white;
+        padding:5%;
+        width:100%;
+        margin-bottom:5%;
+    }
+</style>
+
+{% endblock %}

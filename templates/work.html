@@ -1,0 +1,63 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+
+<div>
+    <h2>Edit Work Day</h2>
+    <hr>
+    <div id="workday">
+        <h3>Adding Work Day</h3>
+        <form action="/edited" method="post" onclick="return validation()">
+            <table>
+                <tr>
+                    <td>Weekday:</td>
+                    <td>
+                        <input type="radio" name="weekday" value="Mon">Mon
+                        <input type="radio" name="weekday" value="Tue">Tue
+                        <input type="radio" name="weekday" value="Wed">Wed
+                        <input type="radio" name="weekday" value="Thur">Thur
+                        <input type="radio" name="weekday" value="Fri">Fri
+                        <input type="radio" name="weekday" value="Sat">Sat
+                        <input type="radio" name="weekday" value="Sun">Sun
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lunch Time (1 hr):</td>
+                    <td><input type="time" name="lunch" min="10:00" max="20:00"></td>
+                </tr>
+                <tr>
+                    <td>Start Time:</td>
+                    <td><input type="time" name="start" min="10:00" max="20:00" required></td>
+                </tr>
+                <tr>
+                    <td>End Time:</td>
+                    <td><input type="time" name="ending" min="10:00" max="20:00" required></td>
+                </tr>
+            </table>
+            <button type="submit">Submit</button>
+        </form>
+        <p>* The shop operation time is: 10:00 - 20:00.</p>
+    </div>
+</div>
+<style>
+    #workday{
+        background-color:white;
+        margin:auto;
+        padding:3%;
+    }
+
+    input[type='radio']{
+        margin-right:1%;
+        margin-left:3%;
+    }
+
+    input[type='time']{
+        margin-bottom:3%;
+        width:100%;
+    }
+
+    td{
+        width:50%;
+    }
+</style>
+
+{% endblock %}

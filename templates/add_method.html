@@ -1,0 +1,23 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Add Course by:</h3>
+<hr>
+<a class="btn" href="/by_teacher" id="Teacher">Teacher</a>
+<a class="btn" href="/add" id="Instruments">Instruments</a>
+
+
+<style>
+    #Teacher, #Instruments{
+        width:45%;
+        padding:10%;
+        background-color:white;
+    }
+
+    #Teacher{
+        margin-right:5%;
+    }
+
+</style>
+
+{% endblock %}

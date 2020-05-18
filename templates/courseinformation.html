@@ -1,0 +1,115 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Course Information</h3>
+<form action="/payment" method="post">
+<div id="information">
+
+    <table id="detail">
+        <tr>
+            <td>Course Type:</td>
+            <td>{{course}}</td>
+            <input type="hidden" name="course" value="{{course}}">
+        </tr>
+        <tr>
+            <td>Teacher:</td>
+            <input type="hidden" name="teacherid" value="{{result[2]}}">
+            {% if result[1] == 'Male'%}
+            <td>Mr {{result[0]}}</td>
+
+            {% else %}
+            <td>Miss {{result[0]}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Course Level:</td>
+            <td>
+                <select name="level">
+                    <option value="{{result2[0]}}">Interest Class (Price: HKD {{result2[1]}})</option>
+                    <option value="{{level[0][0]}}">Pre-grade-1 (Price: HKD {{level[0][1]}})</option>
+                    <option value="{{level[1][0]}}">Grade 1  (Price: {{level[1][1]}})</option>
+                    <option value="{{level[2][0]}}">Grade 2  (Price: {{level[2][1]}})</option>
+                    <option value="{{level[3][0]}}">Grade 3  (Price: {{level[3][1]}})</option>
+                </select>
+            </td>
+        </tr>
+        {% if course != 'piano' %}
+        <tr>
+            <td>No. of lessons:</td>
+            <td>4 (8 lessons for interest class)</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td>No. of lessons:</td>
+            <td>4</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td>Weekday:</td>
+            <td>{{weekday}}</td>
+            <input type="hidden" name="weekday" value="{{weekday}}">
+        </tr>
+        <tr>
+            <td>Start date:</td>
+            <td>Next {{weekday}}</td>
+            <input type="hidden" name="weekday" value="{{weekday}}">
+        </tr>
+        <tr>
+            <input type="hidden" name="starttime" value="{{time}}">
+            <td>Time:</td>
+            <td>{{time}}</td>
+        </tr>
+        <tr>
+            <td>Duration:</td>
+            <td>30 minutes</td>
+            <input type="hidden" name="duration" value="30">
+        </tr>
+    </table>
+</div>
+<hr>
+<h3 style="margin-top:5%; margin-bottom:5%;">Read before application:</h3>
+<ul>
+    <li>The default number of course is <b>4 lessons</b>.</li>
+
+    <li>The first lesson will be carried on the <b>next coming week</b>.
+        <br>E.g. Apply at this Monday (for Monday course) -> First lesson: Next Monday.</li>
+    <li>There is only 1 lesson per week for each course.</li>
+    <li>After all interest class, the course level will be <b>changed into pre-grade-one</b>.</li>
+    <li>There will be a <b>$50 practise coupon</b> given for the new comers.
+        After payment, you need to <b>find counter</b> to get it.</li>
+    <li>Only<b> 1 lesson</b> is permitted to have personal leave.
+        If there is any other reasons to leave, please <b>provide the relevant documents</b> for counter approval.</li>
+    <li>Please give the personal leave <b>24 hours before the lesson start</b>. Otherwise, staff may not approve it.</li>
+    <li>Student can require to <b>have a make-up class</b> when applying personal leave. For more details, please contact us.</li>
+    <li>If there are any questions, please find us by phone at 2665 7003, or facebook.</li>
+    <li>The company have <b>the final right to arrange classes.</b></li>
+</ul>
+
+    <input type="checkbox" style="margin-right:3%;" required>Agree with above statement<br>
+
+    <button type="submit" id="apply">Apply now</button>
+
+</form>
+
+<style>
+    #information{
+        background-color:white;
+        padding:5%;
+        margin-top:5%;
+    }
+
+    #detail{
+        width:95%;
+        margin:auto;
+    }
+
+    #apply{
+        width:100%;
+        background-color:#66ccff;
+        margin-top:5%;;
+        padding:2%;
+    }
+
+</style>
+
+{% endblock %}

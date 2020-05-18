@@ -1,0 +1,19 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>Contact Student</h3>
+<hr>
+<form action="/show_student" method="post">
+    <label for="teacher_id">Enter Teacher ID:</label>
+    <input type="number" placeholder="Teacher ID" name="teacher_id" id="teacher_id">
+    <button type="submit" class="btn" id="student">Submit</button><br><br>
+</form>
+
+<style>
+    #student{
+        background-color:#33cc33;
+        color:white;
+    }
+</style>
+
+{% endblock %}

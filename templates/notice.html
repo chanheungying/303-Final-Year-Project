@@ -1,0 +1,74 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>Give Notice:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+        {% if Topic != None %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success to give notice: {{Topic}}!</strong>
+        </div>
+        {% else %}
+        {% endif %}
+
+<form action="/new_message" method="post">
+    <label for="topic" style="margin-right:3%;">Topic: </label><input type="text" name="topic" id="topic"><br>
+    <label for="message">Message: </label><br>
+    <textarea name="message" id="message" rows="5" cols="55"></textarea><br>
+    <button class="btn" id="submit" type="submit"> Submit </button>
+</form>
+
+
+<h3 style="margin-top:30px;">Released Notice:</h3>
+<hr>
+{% if result != [] %}
+        {% for i in range(num) %}
+        <div id="notice">
+            <table>
+                <tr >
+                    <td>Topic:</td>
+                    <td><b>{{result[i][2]}}</b></td>
+                </tr>
+                <tr>
+                    <td>Staff:</td>
+                    <td>{{result[i][4]}}</td>
+                </tr>
+                <tr>
+                    <td>Message:</td>
+                    <td style="width:75%;">{{result[i][3]}}</td>
+                </tr>
+                <tr>
+                    <td>Time:</td>
+                    <td>{{result[i][1]}}</td>
+                </tr>
+            </table>
+        </div>
+{% endfor %}
+{% else %}
+
+<p style="text-align:center;">No notice is given!</p>
+
+{% endif %}
+
+<style>
+    #submit{
+        background-color:#ccccff;
+        width:100%;
+        margin-top:3%;
+    }
+
+    #notice{
+        padding:5%;
+        background-color:white;
+        margin-bottom:10%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

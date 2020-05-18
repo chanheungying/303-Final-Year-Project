@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Staff Log In</title>
+</head>
+<body>
+
+    {% if error != None %}
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Error!</strong> {{error}}
+        </div>
+    {% else %}
+    {% endif %}
+
+    <div id="staff">
+        <h3>Staff Management System</h3>
+        <form action="/main_menu" method="POST" name="login">
+            <input type="text" placeholder="Staff ID" name="UserID" required><br>
+            <input type="password" placeholder="Password" name="password" required><br>
+            <button type="submit" id="Submit">Submit</button>
+        </form>
+    </div>
+
+    <style>
+        #staff{
+            text-align:center;
+            background-color: white;
+            padding:5%;
+            margin-top:200px;
+            margin-left:15%;
+            width:60%;
+        }
+
+        input[type="text"],
+        input[type="password"]{
+            margin-top:5%;
+            width:50%;
+            padding:2%;
+        }
+
+        body{
+            background-color: #e6f7ff;
+        }
+
+        #Submit{
+            margin-top:7%;
+            width:50%;
+            background-color:#00cc44;
+            padding:3%;
+        }
+    </style>
+
+</body>
+</html>

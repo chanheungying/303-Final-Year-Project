@@ -1,0 +1,80 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>Student Content Information:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ffcc99; margin-bottom:5%;">Back</a><br>
+<label for="searching" style="margin-right:5%;">Searching:</label>
+<input id="searching" type="text" placeholder="Searching..">
+
+        <div id="attend">
+                <table>
+                    <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Time</th>
+                              <th>Day</th>
+                              <th>Phone</th>
+                              <th>Course</th>
+                          </tr>
+                    </thead>
+                    <tbody id="student_information">
+                          {% for i in range(Course_num) %}
+                          <tr>
+                              <td>{{result[i][0]}}</td>
+                              <td>{{CourseTime[i]}} - {{Course_end[i]}}</td>
+                              <td>{{result[i][2]}}</td>
+                              <td>{{result[i][5]}}</td>
+                              <td>{{result[i][1]}}</td>
+                          </tr>
+                          {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+
+
+
+<style>
+    table{
+        width:100%;
+        margin:auto;
+    }
+
+    #attend{
+        padding:5%;
+        background-color:white;
+        margin-bottom:10%;
+    }
+
+    #make-up-class{
+        padding:5%;
+        background-color:#e6e6ff;
+        margin-bottom:10%;
+    }
+
+    #take{
+        background-color:#ccccff;
+        width:100%;
+        margin-top:3%;
+    }
+
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#searching").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#student_information tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+{% endblock %}

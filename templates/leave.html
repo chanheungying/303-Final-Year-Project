@@ -1,0 +1,70 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h2>Apply Personal Leave</h2>
+<div id="apply">
+    <form id="leave" action="/student_leave" method="post">
+        Course:
+        <select name="course_id">
+            {% for i in range(No) %}
+            <option value="{{course_list[i][1]}}">{{course_list[i][0]}}</option>
+            {% endfor %}
+        </select><br>
+        <p>Please select the date you will leave:</p>
+        <select name="attend_id">
+            {% for i in range(attend_no) %}
+            <option value="{{attend[i][4]}}">{{course_date[i]}} {{course_time[i]}} ({{attend[i][2]}} lesson)</option>
+            {% endfor %}
+        </select><br>
+        <p>Reason to leave:</p>
+        <input type="radio" name="reason" value="Illness"><label>Illness</label><br>
+        <input type="radio" name="reason" value="School events"><label>School Events</label><br>
+        <input type="radio" name="reason" value="Others"><label>Others</label><br>
+        <p>Need make-up class?</p>
+        <input type="radio" name="makeup" value="Yes"><label>Yes</label><br>
+        <input type="radio" name="makeup" value="No"><label>No</label><br>
+        <button type="submit" id="submitting" class="btn">Submit</button>
+    </form>
+</div>
+
+<style>
+    #apply{
+        background-color:white;
+        padding:2%;
+        margin:3%;
+    }
+
+    #leave{
+        margin:5%;
+    }
+
+    p{
+        margin-top:7%;
+    }
+
+    label{
+        margin-left:3%;
+    }
+
+    input[type="radio"]{
+        margin-left:5%;
+    }
+
+    input[type="text"]{
+        width:75%;
+        padding:2%;
+    }
+
+    #submitting{
+        margin-top:5%;
+        width:50%;
+        padding:1%;
+    }
+
+    #submitting{
+        width:100%;
+        background-color:#ccccff;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>
+    Adding Course
+</h3>
+<hr>
+
+    <div class="dropdown">
+        Instrument:
+        <button id="instrument"class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{course_type}}
+        </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    {% for i in range(course_no) %}
+      {% if course[i][0] == course_type %}
+      {% else %}
+      <form action="/course" method="post">
+          <input type="hidden" name="instrument" value="{{course[i][0]}}">
+          <input type="hidden" name="weekday" value="{{weekday}}">
+          <button class="dropdown-item" type="submit">{{course[i][0]}}</button>
+      </form>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</div>
+
+
+
+
+
+<ul class="nav nav-tabs nav-justified" style="margin-top:2%">
+        {% for i in range(list_no) %}
+        {% if weekday_list[i] != weekday %}
+        <li class="nav-item">
+              <form action="/course" method="post">
+                  <input type="hidden" name="instrument" value="{{course_type}}">
+                  <input type="hidden" name="weekday" value="{{weekday_list[i]}}">
+                  <button class="nav-link" type="submit" style="width:100%; background-color: transparent;">
+                      {{weekday_list[i]}}
+                  </button>
+              </form>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <form action="/course" method="post">
+              <input type="hidden" name="instrument" value="{{course_type}}">
+              <input type="hidden" name="weekday" value="{{weekday}}">
+              <button class="nav-link active" type="submit" style="width:100%">{{weekday}}</button>
+          </form>
+        </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<p>*Please choose a teacher with suitable course time*<br>
+    <b style="color:green">Green</b> = available, <b style="color:red">Red</b> = Not available</p>
+
+{% if result2 != [] %}
+{% for i in range(No):%}
+
+<div id="teacher">
+
+    {% if result2[i][3] == 'Male'%}
+    <h3>Mr {{result2[i][2]}}</h3>
+    {% else %}
+    <h2>Miss {{result2[i][2]}}</h2>
+    {% endif %}
+
+    <div id="timetable">
+        {% for b in range(Number[i]):%}
+
+        {% if LunchList[i] != '00:00'%}
+            {% for a in range(Student_num) %}
+
+                    {% if result[a][2]==result2[i][4]%}
+                            {% if student_start_time[a]==AllTime[i][b]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                            {% endif%}
+                    {% endif%}
+            {% endfor %}
+
+                    <!--One Hour Lunch for Teachers-->
+                    {% if LunchList[i] == AllTime[i][b] or LunchList2[i]== AllTime[i][b]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                    {% else %}
+                        <form action="/courseinformation" method="post">
+                            <input name="time" type="hidden" value="{{AllTime[i][b]}}">
+                            <input name="teacherid" type="hidden" value="{{result2[i][4]}}">
+                            <input name="course" type="hidden" value="{{course_type}}">
+                            <input name="weekday" type="hidden" value="{{result2[i][5]}}">
+                            <button class="btn" role="button" type="submit" id="course">{{AllTime[i][b]}}</button>
+                        </form>
+                    {% endif%}
+
+
+        {% else %}
+            {% for a in range(Student_num) %}
+                            {% if result[a][2]==result2[i][4] and student_start_time[a]==AllTime[i][b]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                            {% endif%}
+            {% endfor %}
+                        <form action="/courseinformation" method="post">
+                            <input name="time" type="hidden" value="{{AllTime[i][b]}}">
+                            <input name="teacherid" type="hidden" value="{{result2[i][4]}}">
+                            <input name="course" type="hidden" value="{{course_type}}">
+                            <input name="weekday" type="hidden" value="{{result2[i][5]}}">
+                            <button class="btn" role="button" type="submit" id="course">{{AllTime[i][b]}}</button>
+                        </form>
+        {% endif%}
+    {% endfor %}
+
+    </div>
+</div>
+{% endfor %}
+{% else %}
+
+<p id="message">Sorry, no teacher is available in {{weekday}}.</p>
+{% endif %}
+
+
+<style>
+    p{
+        font-size:16px;
+        text-align:center;
+        margin:5%;
+    }
+
+    #teacher{
+        background-color:white;
+        padding:5%;
+        width:100%;
+        margin-bottom:5%;
+    }
+
+    #timetable{
+        width:90%;
+        text-align:center;
+        margin:auto;
+        height:150px;
+    }
+
+
+    #course{
+        width:19%;
+        background-color:#33cc33;
+        height:39px;
+        margin:0.25%;
+        float: left;
+        height:auto;
+    }
+
+    #nocourse{
+        width:19%;
+        background-color:#e62e00;
+        height:39px;
+        margin:0.25%;
+        float: left;
+        height:auto;
+    }
+
+    #instrument{
+        font-size:14px;
+        background-color:#99b3ff;
+        margin-left:5%;
+    }
+
+    #message{
+        background-color:white;
+        padding-top:10%;
+        padding-bottom:10%;
+    }
+</style>
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

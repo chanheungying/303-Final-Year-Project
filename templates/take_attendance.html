@@ -1,0 +1,28 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>Take attendance</h3>
+<hr>
+<form action="/show_attendant" method="post">
+    <label for="student_id">Enter Student ID:</label>
+    <input type="number" placeholder="Student ID" name="student_id" id="student_id">
+    <button type="submit" class="btn" id="student">Submit</button><br><br>
+
+    <i>Other function:</i><br>
+    <a class="btn" id="late" href="/late_attend">Late attendant record</a>
+</form>
+
+<style>
+    #student{
+        background-color:#33cc33;
+        color:white;
+    }
+
+    #late{
+        margin-top:5%;
+        background-color:#ffbf80;
+        width:100%;
+    }
+</style>
+
+{% endblock %}

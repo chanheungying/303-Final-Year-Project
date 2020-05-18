@@ -1,0 +1,90 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<h3>Personal Leave Approval:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ffcc99; margin-bottom:5%;">Back</a>
+        {% if Name != None %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success to {{Not}} approve student personal leave:<br> {{Name}} ({{Date}})!</strong>
+        </div>
+        {% else %}
+        {% endif %}
+        {% if result != [] %}
+        {% for i in range(num) %}
+        <div id="attend">
+            <form action="/approve_leave" method="post">
+                <table>
+                    <input type="hidden" name="leave_id" value="{{result[i][1]}}">
+                    <input type="hidden" name="Name" value="{{result[i][0]}}">
+                    <input type="hidden" name="Date" value="{{CourseDate[i]}} {{result[i][7]}}">
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{result[i][0]}}</td>
+                        <td>Course:</td>
+                        <td>{{result[i][5]}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td> {{CourseDate[i]}} ({{result[i][7]}})</td>
+                        <td>Leave Time:</td>
+                        <td>{{CourseTime[i]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Reason:</td>
+                        <td>{{result[i][3]}}</td>
+                        <td>Student ID:</td>
+                        <td>{{result[i][8]}}</td>
+                    </tr>
+                </table>
+
+            <button type="submit" class="btn" id="approve">Approve</button>
+            </form>
+            <form action="/not_approve" method="post">
+                    <input type="hidden" name="leave_id" value="{{result[i][1]}}">
+                    <input type="hidden" name="Name" value="{{result[i][0]}}">
+                    <input type="hidden" name="Date" value="{{CourseDate[i]}} {{result[i][7]}}">
+                    <button type="submit" class="btn" id="not">Not Approve</button>
+            </form>
+        </div>
+        {% endfor %}
+        {% else %}
+            <p style="text-align:center;">No personal leave application!</p>
+        {% endif %}
+
+<style>
+    table{
+        width:100%;
+        margin:auto;
+    }
+
+    #attend{
+        padding:5%;
+        background-color:white;
+        margin-bottom:10%;
+    }
+
+    #approve, #not{
+        width:100%;
+        margin-top:3%;
+    }
+
+    #approve{
+        background-color:#99e699;
+    }
+
+    #not{
+        background-color: #ff66a3;
+    }
+
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+
+{% endblock %}

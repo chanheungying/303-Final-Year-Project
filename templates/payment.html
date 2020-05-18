@@ -1,0 +1,101 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Please confirm the details</h3>
+<form action="/invoice" method="post">
+<div id="information">
+    <table id="detail">
+        <tr>
+            <td>Course Type:</td>
+            <td>{{course}}</td>
+            <input type="hidden" name="course" value="{{course_result[0]}}">
+            <input type="hidden" name="coursename" value="{{course}}">
+        </tr>
+        <tr>
+            <td>Teacher:</td>
+            <input type="hidden" name="teacherid" value="{{result[2]}}">
+            {% if result[1] == 'Male'%}
+            <td>Mr {{result[0]}}</td>
+
+            {% else %}
+            <td>Miss {{result[0]}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Course Level:</td>
+            <td>{{result2[0]}}</td>
+            <input type="hidden" name="levelid" value="{{result2[2]}}">
+        </tr>
+        <tr>
+            <td>Course Price:</td>
+            <td>{{result2[1]}}</td>
+            <input type="hidden" name="price" value="{{result2[1]}}">
+        </tr>
+        {% if result2[0] == 'violininterest' or result2[0] == 'guitarinterest' or result2[0] == 'fluteinterest'%}
+        <tr>
+            <td>No. of course:</td>
+            <td>8</td>
+            <input type="hidden" name="qty" value="8">
+        </tr>
+        {% else %}
+        <tr>
+            <td>No. of course:</td>
+            <td>4</td>
+            <input type="hidden" name="qty" value="4">
+        </tr>
+        {% endif %}
+        <tr>
+            <td>Weekday:</td>
+            <td>{{weekday}}</td>
+            <input type="hidden" name="weekday" value="{{weekday}}">
+        </tr>
+        <tr>
+            <input type="hidden" name="starttime" value="{{time}}">
+            <td>Time:</td>
+            <td>{{time}}</td>
+        </tr>
+        <tr>
+            <td>Duration:</td>
+            <td>30 minutes</td>
+            <input type="hidden" name="duration" value="30">
+        </tr>
+        <tr>
+            <td>Start Date:</td>
+            <td>{{date}}</td>
+            <input type="hidden" name="startdate" value="{{date}}">
+        </tr>
+    </table>
+</div>
+
+    <hr>
+
+    <h3>Payment Method:</h3>
+    <input type="radio" name="pay" value="Credit card" id="Card" style="margin-right:2%;" required><label for="Card">Credit Card</label><br>
+    <input type="radio" name="pay" value="AlipayHK" id="AlipayHK" style="margin-right:2%;"><label for="AlipayHK">AlipayHK</label><br>
+
+    <button type="submit" id="apply" class="btn">Submit</button>
+
+</form>
+
+<style>
+    #information{
+        background-color:white;
+        padding:5%;
+        margin-top:5%;
+    }
+
+    #detail{
+        width:95%;
+        margin:auto;
+    }
+
+    #apply{
+        width:100%;
+        background-color:#66ccff;
+        margin-top:5%;;
+        padding:2%;
+    }
+
+</style>
+
+{% endblock %}

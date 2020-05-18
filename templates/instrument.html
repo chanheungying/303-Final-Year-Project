@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block m%}
+    <div style="margin-top:100px;">
+        <div style="margin:auto; width:90%;">
+        <h3>Instrument</h3>
+            <p>There are many courses available for different musical instrument.
+                <b>All classes teach in one-by-one. </b></p>
+        <table id="instrument">
+            <tr>
+                <td>Instruments</td>
+                <td>Suitable Age</td>
+            </tr>
+            <tr>
+                <td>Piano</td>
+                <td><b>>=3 years old</b></td>
+            </tr>
+            <tr>
+                <td>Violin</td>
+                <td><b>>=6 years old</b></td>
+            </tr>
+            <tr>
+                <td>Flute</td>
+                <td><b>>=6 years old</b></td>
+            </tr>
+            <tr>
+                <td>Guitar</td>
+                <td><b>>=6 years old</b></td>
+            </tr>
+        </table>
+        <h3>Interest Class</h3>
+        <p>Some interest classes are also provided
+            to get in touch with the instrument first</p>
+        <table id="interest">
+            <tr>
+                <td>Instruments</td>
+                <td>Interest class</td>
+            </tr>
+            <tr>
+                <td>Piano</td>
+                <td>$198 per <b>4 lessons</b> (Total: 12 lessons)</td>
+            </tr>
+            <tr>
+                <td>Violin</td>
+                <td>$888 for <b>8 lessons</b> with a <b>free violin</b></td>
+            </tr>
+            <tr>
+                <td>Flute</td>
+                <td>$1488 for <b>8 lessons</b> with a <b>free flute</b></td>
+            </tr>
+            <tr>
+                <td>Guitar</td>
+                <td>$788 for <b>8 lessons</b> with a <b>free guitar</b></td>
+            </tr>
+        </table>
+
+        <h3>Regular Class</h3>
+            <p>The fees for <b>all musical instruments' regular courses are the same</b>.
+                It will be different <b>according to the level and the length</b> of the course.
+            The following are the fees of each level. (HKD)</p>
+        <table id="fees">
+            <tbody>
+            <tr id="time">
+                <td>Level/ Time</td>
+                <td>30 minutes</td>
+                <td>45 minutes</td>
+                <td>60 minutes</td>
+            </tr>
+            <tr>
+                <td id="level">Pre-grade 1</td>
+                <td>$400</td>
+                <td>$520</td>
+                <td>$680</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 1</td>
+                <td>$400</td>
+                <td>$540</td>
+                <td>$720</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 2</td>
+                <td>$430</td>
+                <td>$580</td>
+                <td>$760</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 3</td>
+                <td>$480</td>
+                <td>$620</td>
+                <td>$820</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 4</td>
+                <td>/</td>
+                <td>$740</td>
+                <td>$920</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 5</td>
+                <td>/</td>
+                <td>$810</td>
+                <td>$980</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 6</td>
+                <td>/</td>
+                <td>$890</td>
+                <td>$1020</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 7</td>
+                <td>/</td>
+                <td>$990</td>
+                <td>$1140</td>
+            </tr>
+            <tr>
+                <td id="level">Grade 8</td>
+                <td>/</td>
+                <td>$1280</td>
+                <td>$1480</td>
+            </tr>
+            <tr>
+                <td id="level">ATCL</td>
+                <td>/</td>
+                <td>$1790</td>
+                <td>$2250</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+
+<style>
+    #fees{
+        margin:auto;
+        text-align:center;
+        width:80%;
+        background-color: #f2f2f2;
+    }
+
+    #instrument, #interest{
+        margin:auto;
+        width:95%;
+        background-color: #f2f2f2;
+        text-align:center;
+    }
+
+    #level, #time{
+       background-color:#e6e6e6;
+    }
+
+    h3{
+        margin-top: 5%;
+    }
+
+
+</style>
+
+{% endblock %}

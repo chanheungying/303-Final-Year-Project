@@ -1,0 +1,96 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h2>Invoice</h2>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+{% if invoice_list != [] %}
+    {% for i in range(invoice_no) %}
+    <div id="leave">
+        <table id="invoice">
+            <tr style="background-color:#e6f0ff;">
+                <td><b>Invoice ID:</b></td>
+                <td><b>{{invoice_list[i][0]}}</b></td>
+                <td> </td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td>Level:</td>
+                <td>Qty:</td>
+                <td>Price:</td>
+            </tr>
+            <tr>
+                <td>--------------</td>
+                <td>--------------</td>
+                <td>--------------</td>
+                <td>--------------</td>
+            </tr>
+            {% for a in range(item_no) %}
+                {% if invoice_item[a][4] == invoice_list[i][0] %}
+                    <tr>
+                        <td>{{invoice_item[a][1]}}</td>
+                        <td>{{invoice_item[a][0]}}</td>
+                        <td>{{invoice_item[a][2]}}</td>
+                        <td>{{invoice_item[a][3]}}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td>--------------</td>
+                <td>--------------</td>
+                <td>--------------</td>
+                <td>--------------</td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td></td>
+                <td>HKD</td>
+                <td>{{invoice_list[i][2]}}</td>
+            </tr>
+
+            </table>
+        <table id="invoice_detail">
+            <tr>
+                <td>________________________</td>
+                <td>______________________________________</td>
+            </tr>
+            <tr>
+                <td>Pay Method:</td>
+                <td>{{invoice_list[i][3]}}</td>
+            </tr>
+            <tr>
+                <td>Time:</td>
+                <td>{{invoice_list[i][4]}}</td>
+            </tr>
+            <tr>
+                <td>Lesson Start Date: </td>
+                <td>{{course_month[i]}}</td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+
+{% else %}
+<p style="text-align: center;">You do not have any invoice!</p>
+{% endif %}
+
+<style>
+    #leave{
+        background-color:white;
+        padding:2%;
+        margin:3%;
+    }
+
+    #invoice, #invoice_detail{
+        width:100%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

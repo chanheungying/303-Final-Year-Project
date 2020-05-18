@@ -1,0 +1,27 @@
+{% extends 'base2.html' %}
+{% block login %}
+<h3>Please choose type of record:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+<a href="/invoice_record" class="btn" id="btn1">Invoice</a>
+<a href="/attendant_record" class="btn" id="btn2">Attendant Record</a>
+<a href="/leave_record" class="btn" id="btn3">Personal Leave Record</a>
+
+<style>
+    #btn1, #btn2, #btn3{
+        width:100%;
+        background-color:#99c2ff;
+        margin-bottom:5%;
+    }
+
+    #btn1{
+        margin-top:5%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

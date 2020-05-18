@@ -1,0 +1,55 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+<div id="show">
+    <h2 style="margin-bottom:7%;">Teacher Personal Leave</h2>
+    <form action="/teacher_leave" method="post">
+    <table id="detail">
+        <tr>
+            <td>Leave Date:</td>
+            <td><input type="date" id="day_leave" name="day_leave"></td>
+        </tr>
+
+        <tr>
+            <td>Leave Reason:</td>
+            <td><input type="text" name="reason"></td>
+        </tr>
+    </table>
+        <button type="submit" class="btn btn-success" id="level">Submit</button>
+    </form>
+</div>
+
+<style>
+    #detail{
+        width:80%;
+        margin:auto;
+    }
+
+    #show{
+        margin:auto;
+        background-color:white;
+        padding:7%;
+        width:90%;
+    }
+
+    #back{
+        background-color:#b3c6ff;
+        margin-bottom:5%;
+    }
+
+    #level{
+        width: 100%;
+        margin-top:5%;
+    }
+
+    tr{
+        height:30px;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

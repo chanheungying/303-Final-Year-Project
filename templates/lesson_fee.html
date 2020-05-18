@@ -1,0 +1,158 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h2>Invoice</h2>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+
+<form action="/add_invoice" method="post">
+    <div id="leave">
+        <table id="invoice">
+            <tr style="background-color:#e6f0ff;">
+                <td><b>ID:</b></td>
+                <td><b>{{result[0][6]}}</b></td>
+                <input type="hidden" name="student_id" value="{{result[0][6]}}">
+                <td>Name:</td>
+                <td>{{result[0][0]}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td>Level:</td>
+                <td>Start Date:</td>
+                <td>Price:</td>
+                <td>Qty:</td>
+                <td>Total:</td>
+            </tr>
+            <tr>
+                <td>--------</td>
+                <td>------------</td>
+                <td>------------</td>
+                <td>--------</td>
+                <td>--------</td>
+                <td>-----</td>
+            </tr>
+
+            {% for a in range(num) %}
+                    <script>
+                    $(document).ready(function(){
+                        $(".calculate{{a}}").on("keyup", ".qty{{a}}", function(){
+                            var price = +$(".price{{a}}").data("price");
+                            var qty = +$(this).val();
+                            $("#total{{a}}").text("$" + price * qty/4);
+                        })
+                    })
+                    </script>
+                    <tr class="calculate{{a}}">
+                        <td>{{result[a][1]}}</td>
+                        <td>{{result[a][2]}}</td>
+                        <td>{{lesson_date[a]}}</td>
+                        <td>{{result[a][3]}}</td>
+                        <input type="hidden" name="date{{result[a][1]}}" value="{{result[a][4]}}">
+                        <input type="hidden" name="course{{result[a][1]}}" value="{{result[a][5]}}">
+                        <input type="hidden" name="level{{result[a][1]}}" value="{{result[a][7]}}">
+                        <input type="hidden" name="teacher{{result[a][1]}}" value="{{result[a][8]}}">
+                        <input type="hidden" class="price{{a}}" data-price="{{result[a][3]}}" name="price{{result[a][1]}}" value="{{result[a][3]}}">
+                        <td style="width:15%;"><input type="number" class="qty{{a}}" name="qty{{result[a][1]}}" style="width:100%;" required></td>
+                        <td><span id="total{{a}}">$0</span></td>
+                    </tr>
+            {% endfor %}
+
+            <tr>
+                <td>--------</td>
+                <td>------------</td>
+                <td>------------</td>
+                <td>--------</td>
+                <td>--------</td>
+                <td>-----</td>
+            </tr>
+            {% for i in range(num2) %}
+                    <tr class="calculate{{i}}">
+                        <td>{{result2[i][1]}}</td>
+                        <td>{{result2[i][2]}}</td>
+                        <td>/</td>
+                        <td>{{result2[i][3]}}</td>
+                        <td>{{result2[i][4]}} (Not attend)</td>
+                        <td>${{result2[i][9]}}</td>
+                    </tr>
+
+
+            <tr>
+                <td>--------</td>
+                <td>------------</td>
+                <td>------------</td>
+                <td>--------</td>
+                <td>--------</td>
+                <td>-----</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>Total:</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>HKD</td>
+                <td><span id="total_price">$0</span></td>
+            </tr>
+            </table>
+        <table id="invoice_detail">
+            <tr>
+                <td>_________________</td>
+                <td>______________________________________</td>
+            </tr>
+            <tr>
+                <td>Pay Method:</td>
+                <td>
+                    <input type="radio" name="pay" value="Credit card" id="Card" style="margin-right:2%;" required><label for="Card">Credit Card</label>
+                    <input type="radio" name="pay" value="AlipayHK" id="AlipayHK" style="margin-right:2%;"><label for="AlipayHK">AlipayHK</label><br>
+                    <input type="radio" name="pay" value="Cash" id="Cash" style="margin-right:2%;"><label for="Cash">Cash</label><br>
+                    <input type="hidden" name="month" value="{{result[0][4]}}">
+                </td>
+            </tr>
+        </table>
+
+                    <script>
+                    $(document).ready(function(){
+                    {% for a in range(num) %}
+                        var total = 0;
+                        $(".calculate{{a}}").on("keyup", ".qty{{a}}", function(){
+                            var price = +$(".price{{a}}").data("price");
+                            var qty = +$(this).val();
+                            total += price * qty/4
+                            $("#total_price").text("$" + total);
+                        })
+                    {% endfor %}
+                    })
+                    </script>
+        <button type="submit" id="apply" class="btn">Submit</button>
+    </div>
+</form>
+
+<style>
+    #leave{
+        background-color:white;
+        padding:2%;
+        margin:3%;
+    }
+
+    #invoice, #invoice_detail{
+        width:100%;
+    }
+
+    #apply{
+        width:100%;
+        background-color:#66ccff;
+        margin-top:5%;;
+        padding:2%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

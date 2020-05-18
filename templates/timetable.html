@@ -1,0 +1,155 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+
+<div style="margin:auto; width:90%;">
+    {% if result[3] == 'Male'%}
+    <h2>Hello! Mr. {{result[1]}}</h2>
+    {% else %}
+    <h2>Hello! Miss {{result[1]}}</h2>
+    {% endif %}
+    <hr>
+    <h3>Today is <b id="today"></b>.</h3>
+    <h5>You have {{class_no}} make-up class.
+        <a class="btn btn-success" href="/class_record" style="float: right;">Details</a>
+    </h5>
+    <br>
+
+    {% for c in range(class_no) %}
+            <div id="makeup">
+                <h5><b>{{class_list[c][1]}}</b></h5>
+                <p>Time: {{class_start[c]}}<br>
+                   Make-up Class Date: {{class_date[c]}}</p>
+            </div>
+    {% endfor %}
+
+
+
+    <h2 style="margin-top:7%;">Timetable<a class="btn" href="/work" id="work">Edit Work Day</a></h2>
+    <hr>
+
+
+    <!-- Button: weekday  Collapse: student name + Time(sorted) data-target= weekday -->
+    {% if result2 != [] %}
+        {% for i in range(No):%}
+        <button id="weekday" data-toggle="collapse" data-target="#{{result2[i][1]}}demo">{{result2[i][1]}} (Time: {{Work_start[i]}}-{{Work_end[i]}})</button>
+
+        <div id="{{result2[i][1]}}demo" class="collapse">
+            <div class="row" id="student">
+                <div class="col-3">
+                    Time
+                </div>
+                <div class="col-9">
+                    Student Information
+                </div>
+            </div>
+            {% for a in range(student_no) %}
+                {% if student[a][5] == result2[i][1] %}
+                    <div id="lesson">
+                        <div class="row">
+                            <div class="col-3" style="margin-top:5%; padding-left:7%;">
+                                {{Start_Time[a]}}-{{End_Time[a]}}
+                            </div>
+                            <div class="col-9">
+                                <form action="/studentrecord" method="post">
+                                    <input type="hidden" name="student_id" value="{{student[a][6]}}">
+                                    <input type="hidden" name="course_id" value="{{student[a][7]}}">
+                                    <button id="student_detail" class="btn" type="submit">
+                                            <b>{{student[a][0]}}</b><br>
+                                                Course: {{student[a][4]}}<br>
+                                                Personal Leave:
+                                                {% if leave_list != [] %}
+                                                {% for b in range(leave_no) %}
+                                                    {% if leave_list[b][1] == student[a][6] %}
+                                                        {% if class_list !=[] %}
+                                                            {% for c in range(class_no) %}
+                                                                {% if leave_date[b] == class_date[c] and class_start[c]==Start_Time[a] %}
+                                                                    <br>{{leave_date[b]}} (Make-up class: {{class_list[c][1]}})
+                                                                {% else %}
+                                                                    <br>{{leave_date[b]}}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% else %}
+                                                                <br>{{leave_date[b]}}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% endif %}
+                                    </button>
+                                </form>
+                            </div>
+
+
+                        </div>
+                        <form action="/add_class" method="post">
+                                <input type="hidden" name="student_id" value="{{student[a][6]}}">
+                                <input type="hidden" name="course_id" value="{{student[a][7]}}">
+                            <button class="btn" id="add" type="submit">Add Make-up class</button>
+                        </form>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+    {% else %}
+    <p>Miss {{result[1]}}, no work day is added. Please <a href="/work"> add work day.</a></p>
+    {% endif %}
+    <!--End Loop-->
+
+    <script>
+
+        var today = new Date();
+
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+        document.getElementById('today').innerHTML = date;
+
+    </script>
+
+    <style>
+        h3{
+            color:#1a1aff;
+        }
+
+        #makeup, #lesson{
+            background-color:white;
+            padding:2%;
+            margin-top:2%;
+            margin-bottom:3%;
+            width:100%;
+            text-align:left;
+            margin-left:0px;
+        }
+
+        #student_detail{
+            width:100%;
+            text-align:left;
+        }
+
+        #weekday{
+            width:100%;
+            height:45px;
+            background-color:#aa80ff;
+        }
+
+        #work{
+            background-color:#bfbfbf;
+            margin-left:7%;
+        }
+
+        #student{
+            background-color:white;
+            text-align:center;
+            width:100%;
+            margin:auto;
+        }
+
+        #add{
+            width:100%;
+            background-color: #ccccff;
+        }
+    </style>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>Account Information</h3>
+<img id="user" src="{{url_for('static', filename = 'user.png')}}" alt="account" style="margin-top:3%;">
+<table>
+    <tr>
+        <td>Staff ID:</td>
+        <td>{{result[0]}}</td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td>{{result[1]}}</td>
+    </tr>
+    <tr>
+        <td>Gender:</td>
+        <td>{{result[2]}}</td>
+    </tr>
+    <tr>
+        <td>Phone:</td>
+        <td>{{result[3]}}</td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td>{{result[4]}}</td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td>{{result[5]}}</td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td>{{result[6]}}</td>
+    </tr>
+</table>
+
+<a class="btn" href="/change_staff" id="change">Change Information</a>
+
+<a class="btn" href="/logoutstaff" id="out">Log Out</a>
+
+
+<style>
+
+    #account{
+        margin-bottom:5%;
+    }
+
+
+     table{
+        margin: auto;
+        width:60%;
+    }
+
+    #change{
+        margin-top:5%;
+        margin-left:30%;
+        width:40%;
+        background-color: #ffb366;
+        padding:1.5%
+    }
+
+    #out{
+        margin-top:3%;
+        margin-left:30%;
+        width:40%;
+        background-color: #33cc33;
+        padding:1.5%
+    }
+
+    #user{
+        width:50%;
+        margin-left:25%;
+    }
+
+
+</style>
+
+{% endblock %}

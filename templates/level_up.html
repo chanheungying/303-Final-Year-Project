@@ -1,0 +1,74 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<a href="/timetable" class="btn" id="back">Back</a>
+<div id="show">
+    <h2 style="margin-bottom:7%;">Student Information</h2>
+    <form action="/change_level" method="post">
+        <input type="hidden" name="student_id" value="{{student[6]}}">
+        <input type="hidden" name="course_id" value="{{student[7]}}">
+    <table id="detail">
+        <tr>
+            <td>Name:</td>
+            <td>{{student[0]}}</td>
+        </tr>
+
+        <tr>
+            <td>Course:</td>
+            <td>{{student[4]}}</td>
+        </tr>
+        <tr>
+            <td>Course Length:</td>
+            <td>{{minutes}}</td>
+        </tr>
+        <tr>
+            <td>Current Level:</td>
+            <td>{{student[1]}}</td>
+        </tr>
+
+        <tr>
+            <td>Change Level:</td>
+            <td>
+                <select name="level_id">
+                {% for i in range(level_no) %}
+                <option value="{{level_list[i][0]}}">{{level_list[i][1]}}</option>
+                {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Time:</td>
+            <td>{{Start_Time[0]}}-{{End_Time[0]}}</td>
+        </tr>
+    </table>
+        <button type="submit" class="btn btn-success" id="level">Change level </button>
+    </form>
+</div>
+
+<style>
+    #detail{
+        width:80%;
+        margin:auto;
+    }
+
+    #show{
+        margin:auto;
+        background-color:white;
+        padding:7%;
+        width:90%;
+    }
+
+    #back{
+        background-color:#b3c6ff;
+        margin-bottom:5%;
+    }
+
+    #level{
+        width: 100%;
+        margin-top:5%;
+    }
+
+    tr{
+        height:30px;
+    }
+</style>
+{% endblock %}

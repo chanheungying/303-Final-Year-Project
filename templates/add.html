@@ -1,0 +1,98 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<button onclick="Back()" class="btn" id="back" style="float:left;"> Back</button>
+<h3 style="text-align:center;">
+    Adding Course
+</h3>
+<hr>
+
+<h4>Which instrument are you going to learn?</h4>
+<p>* Only <b>30 minutes</b> courses are available online. If longer duration is needed,
+        please go to the counter to ask for details</p>
+
+    <form action="/course" method="post">
+        <input type="hidden" name="instrument" value="piano">
+        <input type="hidden" name="weekday" value="Sun">
+        {% if course_list[0] == 'piano' %}
+        <button id="course" type="submit" disabled>
+            <b>Piano  (You have this course)</b><br>
+            Suitable for people aged 3 or above
+        </button>
+        {% else %}
+        <button id="course" type="submit">
+            <b>Piano</b><br>
+            Suitable for people aged 3 or above
+        </button>
+        {% endif %}
+    </form>
+
+    <form action="/course" method="post">
+        <input type="hidden" name="instrument" value="violin">
+        <input type="hidden" name="weekday" value="Sun">
+        {% if course_list[0] == 'violin' %}
+        <button id="course2" type="submit" disabled>
+            <b>Violin  (You have this course)</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% else %}
+        <button id="course2" type="submit">
+            <b>Violin</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% endif %}
+    </form>
+
+    <form action="/course" method="post">
+        <input type="hidden" name="instrument" value="guitar">
+        <input type="hidden" name="weekday" value="Sun">
+        {% if course_list[0] == 'guitar' %}
+        <button id="course3" type="submit"  disabled>
+            <b>Guitar  (You have this course)</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% else %}
+        <button id="course3" type="submit">
+            <b>Guitar</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% endif %}
+    </form>
+
+    <form action="/course" method="post">
+        <input type="hidden" name="instrument" value="flute">
+        <input type="hidden" name="weekday" value="Sun">
+        {% if course_list[0] == 'flute' %}
+        <button id="course4" type="submit"  disabled>
+            <b>Flute  (You have this course)</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% else %}
+        <button id="course4" type="submit">
+            <b>Flute</b><br>
+            Suitable for people aged 6 or above
+        </button>
+        {% endif %}
+    </form>
+
+<style>
+    #course, #course2, #course3, #course4{
+        width:100%;
+        margin-top:5%;
+        background-color: white;
+        text-align:left;
+        padding:5%;
+    }
+
+    #back{
+        margin-top:1%;
+        background-color:#b3b3ff;
+    }
+</style>
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

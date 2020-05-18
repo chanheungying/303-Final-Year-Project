@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+    <!------------Nav bar----------------->
+        <nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+        <div class="row" >
+            <div class="col-2 col-sm-1">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        <div class="col-10 col-sm-5">
+            <a class="navbar-brand" href="#" ><img src="{{url_for('static', filename = 'MusicCenter.jpg')}}" class="rounded" alt="logo" width="10%">
+                Distinction Art Music Center</a>
+        </div>
+        </div>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link"  href="/#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="/aboutus">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/instrument">Musical Instrument</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#login">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#signup">Sign Up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/staff">Staff Log In</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- ______________________________LogIn modal___________________________________________-->
+     <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Log In</h2>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+    <form action="http://localhost:5000/account" method="POST">
+      <p><input type="text" name="UserID" placeholder="User ID" required style="width: 400px;" autocomplete="on"></p>
+      <p><input type="password" name="pwd" placeholder="Password" required style="width: 400px;" autocomplete="on"><br></p>
+      <p><button type="submit">Submit</button></p>
+    </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- ______________________________SignUp modal___________________________________________-->
+
+  <div class="modal fade" id="signup" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title">Sign Up</h2>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <p>To have find more about course, please sign up to explore.</p>
+          <form action="/success" method="POST"  onsubmit="return validation()" name="SignUp">
+                <input type="text" name="UserName" placeholder="Name" required><br>
+                <div id="gender">
+                    Gender<br>
+                    <input type="radio" name="gender" value="Male" required><label>Male</label><br>
+                    <input type="radio" name="gender" value="Female"><label>Female</label><br>
+                </div>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="number" name="phone" placeholder="Phone Number" required><br>
+                <input type="text" name="address" placeholder="Address"><br>
+                <input type="password" name="pwd" placeholder="Password" required><br>
+                <input type="password" name="confirmPwd" placeholder="Retype Password" required><br>
+                <button type="Submit">Submit</button>
+          </form>
+
+    <script type="text/javascript">
+       function validation(){
+        var Name = document.forms["SignUp"]["UserName"].value
+        var Phone = document.forms["SignUp"]["phone"].value
+        var Password = document.forms["SignUp"]["pwd"].value
+        var RetypePwd = document.forms["SignUp"]["confirmPwd"].value
+
+        if (Name.length < 3 ) {
+          alert("The length of name must longer than 2");
+          return false;
+        }
+
+        else if (Phone.length < 8 ) {
+          alert("Invalid phone number");
+          return false;
+        }
+
+        else if (Password !== RetypePwd ) {
+          alert("Password is not the same as the retyped one");
+          return false;
+        }
+
+       }
+    </script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<div style="margin-top:100px;">
+    {% block m%}
+
+    {% endblock %}
+</div>
+
+<!---------------- Content     -------------->
+
+
+    <footer>
+            Finding us: <a href="https://www.facebook.com/pg/Distinction-Art-Music-Center-%E5%8D%93%E9%9F%BB%E7%90%B4%E8%A1%8C-157847470943479/about/?ref=page_internal">Facebook</a> | Tel:2665 7003 <br>
+            Powered by Distinction and Art Music Center
+    </footer>
+
+
+    <style>
+        body{
+            background-color: #e6f7ff;
+        }
+
+        nav{
+            background-color:rgb(0, 170, 255, 80%)
+        }
+
+        li:hover{
+            background-color: #80d4ff;
+            color:black;
+        }
+
+        footer{
+            text-align:center;
+            background-color:#33bbff;
+            color:white;
+            margin-top: 100px;
+            padding:5%;
+        }
+
+        input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=number]{
+            margin-top:2%;
+            margin-bottom: 2%;
+            padding: 4px;
+            font-family: cursive;
+            font-weight: 400;
+            font-size: 15px;
+        }
+
+        #gender{
+            width:50%;
+            text-align:left;
+            margin:auto;
+            color:black;
+        }
+
+        label{
+            margin-left:5%
+        }
+
+        input[type=submit]{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            width: 120px;
+            height: 32px;
+            background-color: silver;
+            border-radius: 2px;
+            color: white;
+            font-family: fantasy;
+            font-weight: uppercase;
+            transition: 0.2s ease;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .modal {
+            top: 15%;
+            text-align: center;
+            color: #0099e6;
+            font-family: Futura, sans-serif;
+        }
+
+        .modal-title{
+            margin-left:5%;
+        }
+
+        nav-item{
+            text-align:center;
+        }
+
+        a{
+            text-align:center;
+        }
+
+
+    </style>
+
+
+</body>
+</html>

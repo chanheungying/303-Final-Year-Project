@@ -1,0 +1,105 @@
+{% extends 'base3.html' %}
+{% block staff %}
+<button class="btn btn-primary" style="margin-bottom:3%;" onclick="Back()">Back</button>
+    <h3>Adding New Teacher</h3>
+    <hr>
+        {% if name != None %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success to add new teacher: {{name}} (ID:{{teacher_id}})!</strong>
+        </div>
+        {% else %}
+        {% endif %}
+        <form action="/adding_teacher" method="POST"  onsubmit="return validation()" id="add" name="add">
+                <input type="text" name="UserName" placeholder="Name" required><br>
+                <div id="gender">
+                    <i style="margin-right:5%;">Gender:</i>
+                    <input type="radio" name="gender" value="Male" id="Male" required><label for="Male">Male</label>
+                    <input type="radio" name="gender" value="Female" id="Female"><label for="Female">Female</label><br>
+                </div>
+                <input type="email" name="email" placeholder="Email" required><br>
+                <input type="number" name="phone" placeholder="Phone Number" required><br>
+                <input type="text" name="address" placeholder="Address"><br>
+                <div id="worktype">
+                    <i style="margin-right:5%;">Course Type:</i>
+                    <input type="radio" name="course" value="piano" id="piano" required><label for="piano">Piano</label>
+                    <input type="radio" name="course" value="violin" id="violin"><label for="violin">Violin</label>
+                    <input type="radio" name="course" value="guitar" id="guitar"><label for="guitar">Guitar</label>
+                    <input type="radio" name="course" value="flute" id="flute"><label for="flute">Flute</label>
+                </div>
+                <input type="password" name="pwd" placeholder="Password" required><br>
+                <input type="password" name="confirmPwd" placeholder="Retype Password" required><br>
+                <button type="Submit" class="btn" id="submit">Submit</button>
+        </form>
+
+        <script type="text/javascript">
+               function validation(){
+                var Name = document.forms["add"]["UserName"].value
+                var Phone = document.forms["add"]["phone"].value
+                var Password = document.forms["add"]["pwd"].value
+                var RetypePwd = document.forms["add"]["confirmPwd"].value
+
+                if (Name.length < 3 ) {
+                  alert("The length of name must longer than 2");
+                  return false;
+                }
+
+                else if (Phone.length < 8 ) {
+                  alert("Invalid phone number");
+                  return false;
+                }
+
+                else if (Password !== RetypePwd ) {
+                  alert("Password is not the same as the retyped one");
+                  return false;
+                }
+
+               }
+
+               function Back() {
+                  window.history.back();
+                }
+        </script>
+
+<style>
+    #gender, #worktype{
+            width:100%;
+            text-align:center;
+            margin:auto;
+            color:black;
+        }
+
+    #add{
+        margin:auto;
+    }
+
+    label{
+        margin-right:3%;
+        margin-left:1%;
+    }
+
+    input[type=text],
+        input[type=password],
+        input[type=email],
+        input[type=number]{
+            margin-top:2%;
+            margin-bottom: 2%;
+            padding: 4px;
+            font-family: cursive;
+            font-weight: 400;
+            font-size: 15px;
+            width: 100%;
+        }
+
+    #submit{
+            margin-top: 2%;
+            margin-bottom: 2%;
+            width: 100%;
+            background-color: silver;
+            color: white;
+            font-weight: uppercase;
+            transition: 0.2s ease;
+            cursor: pointer;
+        }
+</style>
+{% endblock %}

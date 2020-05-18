@@ -1,0 +1,143 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<h3>All Late attendant Record:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+        {% if Name != None %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success to take attendance: {{Name}} ({{Date}})!</strong>
+        </div>
+        {% else %}
+        {% endif %}
+        {% if marked != None %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <strong>Success to mark as leaving record: {{name}} ({{date}})!</strong>
+        </div>
+        {% else %}
+        {% endif %}
+
+{% if result != [] %}
+        {% for i in range(Course_num) %}
+        <div id="attend">
+            <form action="/mark_leave" method="post">
+                <table>
+                    <input type="hidden" name="attend_id" value="{{result[i][2]}}">
+                    <input type="hidden" name="Name" value="{{result[i][0]}}">
+                    <input type="hidden" name="Date" value="{{CourseDate[i]}} {{result[i][4]}}">
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{result[i][0]}}</td>
+                        <td>Course:</td>
+                        <td>{{result[i][5]}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Date:</td>
+                        <td> {{CourseDate[i]}} ({{result[i][4]}})</td>
+                        <td>Start Time:</td>
+                        <td>{{CourseTime[i]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher:</td>
+                        <td>{{result[i][1]}}</td>
+                    </tr>
+                </table>
+
+            <button type="submit" class="btn" id="mark">Mark as leaving record</button><br>
+            </form>
+            <form action="/mark_attend" method="post">
+                <input type="hidden" name="attend_id" value="{{result[i][2]}}">
+                <input type="hidden" name="Name" value="{{result[i][0]}}">
+                <input type="hidden" name="Date" value="{{CourseDate[i]}} {{result[i][4]}}">
+                <button type="submit" class="btn" id="take">Mark as attended lesson</button>
+            </form>
+        </div>
+        {% endfor %}
+{% else %}
+
+<p style="text-align:center;">No late attendant record!</p>
+
+{% endif %}
+{% for i in range(class_no) %}
+        <div id="make-up-class">
+            <h5><b>Make-up Class</b></h5>
+            <form action="/taking_attend" method="post">
+                <table>
+                    <input type="hidden" name="attend_id" value="{{class_list[i][6]}}">
+                    <input type="hidden" name="Name" value="{{class_list[i][4]}}">
+                    <input type="hidden" name="Date" value="{{class_date[i]}}">
+                    <tr>
+                        <td>Name:</td>
+                        <td>{{class_list[i][4]}}</td>
+                        <td>Course:</td>
+                        <td>{{class_list[i][8]}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Class Date:</td>
+                        <td>{{class_date[i]}}</td>
+                        <td>Start Time:</td>
+                        <td>{{class_start[i]}}</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher:</td>
+                        <td>{{class_list[i][5]}}</td>
+                        <td>Original Date:</td>
+                        <td>{{leave_date[i]}}</td>
+                    </tr>
+                </table>
+
+            <button type="submit" class="btn" id="mark">Mark as leaving record</button><br>
+            </form>
+            <form action="/mark_attend" method="post">
+                <input type="hidden" name="attend_id" value="{{class_list[i][6]}}">
+                <input type="hidden" name="Name" value="{{class_list[i][4]}}">
+                <input type="hidden" name="Date" value="{{class_date[i]}}">
+                <button type="submit" class="btn" id="take">Mark as attended lesson</button>
+            </form>
+        </div>
+{% endfor %}
+
+<style>
+    table{
+        width:100%;
+        margin:auto;
+    }
+
+    #attend{
+        padding:5%;
+        background-color:white;
+        margin-bottom:10%;
+    }
+
+    #mark{
+        background-color:#ccccff;
+        width:100%;
+        margin-top:3%;
+    }
+
+    #take{
+        background-color:#ff3385;
+        color:white;
+        width:100%;
+        margin-top:3%;
+    }
+
+    #make-up-class{
+        padding:5%;
+        background-color:#e6e6ff;
+        margin-bottom:10%;
+    }
+
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

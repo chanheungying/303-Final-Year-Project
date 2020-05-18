@@ -1,0 +1,85 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<a href="/timetable" class="btn" id="back">Back</a>
+<div id="show">
+    <h2 style="margin-bottom:7%;">Student Information</h2>
+    <table id="detail">
+        <tr>
+            <td>Name:</td>
+            <td>{{student[0]}}</td>
+        </tr>
+
+        <tr>
+            <td>Course:</td>
+            <td>{{student[4]}}</td>
+        </tr>
+        <tr>
+            <td>Level:</td>
+            <td>{{student[1]}}</td>
+        </tr>
+        <tr>
+            <td>Course Time:</td>
+            <td>{{Start_Time[0]}}-{{End_Time[0]}}</td>
+        </tr>
+        <tr>
+            <td>Leave Record:</td>
+            <td>
+                {% if leave_list != [] %}
+                    {% for b in range(leave_no) %}
+                        {{leave_date[b]}}
+                    {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Make-up Class:</td>
+            <td>
+                {% if class_list != [] %}
+                    {% for b in range(class_no) %}
+                        {{class_date[b]}} <br>
+                        (Time: {{class_start[b]}} - {{class_end[b]}})
+                    {% endfor %}
+                {% else %}
+                None
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <form action="/level_up" method="post">
+        <input type="hidden" name="student_id" value="{{student[6]}}">
+        <input type="hidden" name="course_id" value="{{student[7]}}">
+        <button type="submit" class="btn btn-success" id="level">Change course level</button>
+    </form>
+</div>
+
+<style>
+    #detail{
+        width:80%;
+        margin:auto;
+    }
+
+    #show{
+        margin:auto;
+        background-color:white;
+        padding:7%;
+        width:90%;
+    }
+
+    #back{
+        background-color:#b3c6ff;
+        margin-bottom:5%;
+    }
+
+    #level{
+        width: 100%;
+        margin-top:5%;
+    }
+
+    tr{
+        height:30px;
+    }
+</style>
+{% endblock %}

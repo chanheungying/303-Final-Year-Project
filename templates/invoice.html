@@ -1,0 +1,91 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Invoice</h3>
+<div id="information">
+    <p>Success to pay for lessons!</p>
+    <table id="detail">
+        <tr>
+            <td>Invoice ID:</td>
+            <td>{{result3[0]}}</td>
+        </tr>
+        <tr>
+            <td>Payment Time:</td>
+            <td>{{result3[1]}}</td>
+        </tr>
+        <tr>
+            <td>Payment Method:</td>
+            <td>{{result3[3]}}</td>
+        </tr>
+        <tr>
+            <td>Course Month:</td>
+            <td>{{month}}</td>
+        </tr>
+        <tr>
+            <td>Course Type:</td>
+            <td>{{course_result[0]}}</td>
+        </tr>
+        <tr>
+            <td>Teacher:</td>
+            {% if result[1] == 'Male'%}
+            <td>Mr {{result[0]}}</td>
+
+            {% else %}
+            <td>Miss {{result[0]}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Course Level:</td>
+            <td>{{result2[0]}}</td>
+        </tr>
+        <tr>
+            <td>Course Price:</td>
+            <td>{{result2[1]}}</td>
+        </tr>
+        <tr>
+            <td>No. of course:</td>
+            <td>{{qty}}</td>
+        </tr>
+        <tr>
+            <td>Weekday:</td>
+            <td>{{weekday}}</td>
+        </tr>
+        <tr>
+            <td>Time:</td>
+            <td>{{time}}</td>
+        </tr>
+        <tr>
+            <td>Duration:</td>
+            <td>30 minutes</td>
+        </tr>
+        <tr>
+            <td>Start Date:</td>
+            <td>{{date}}</td>
+        </tr>
+    </table>
+</div>
+
+
+
+<style>
+    #information{
+        background-color:white;
+        padding:5%;
+        margin-top:5%;
+    }
+
+    #detail{
+        width:95%;
+        margin:auto;
+    }
+
+    #apply{
+        width:100%;
+        background-color:#66ccff;
+        margin-top:5%;;
+        padding:2%;
+    }
+
+</style>
+
+{% endblock %}

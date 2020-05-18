@@ -1,0 +1,58 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Please choose an instrument of that teacher:</h3>
+<hr>
+
+{% for i in range(teach_no) %}
+
+    <div id="teacher">
+                <h5>Teacher:</h5>
+                {% if teacher_list[i][2] == 'Male'%}
+                <p>Mr. {{teacher_list[i][1]}}</p>
+                {% else %}
+                <p>Miss. {{teacher_list[i][1]}}</p>
+                {% endif %}
+
+                <h5>Course Available:</h5>
+                {% for a in range(course_no)%}
+                    {% if teacher_list[i][0] == course_list[a][0] %}
+                        {% for c in range(cou_no) %}
+                            {% if course_list[a][2] == course_id[c][0] %}
+                                <button disabled class="btn" style="background-color:#99ffcc; margin-bottom:2%;">{{course_list[a][1]}}</button>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+                                <form action="/teacher_time" method="post">
+                                    <input type="hidden" value="{{teacher_list[i][0]}}" name="staff_id">
+                                    <input type="hidden" value="{{course_list[a][2]}}" name="course_id">
+                                    <button type="submit" class="btn" style="background-color:#99ffcc; margin-bottom:2%;">{{course_list[a][1]}}</button>
+                                </form>
+                    {% endif %}
+                {% endfor %}
+
+                <h5>Working day:</h5>
+                {% for b in range(time_no)%}
+                    {% if teacher_list[i][0] == teacher_time[b][0] %}
+                    <i style="margin-right:3%;">{{teacher_time[b][1]}}</i>
+                    {% else %}
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
+
+{% endfor %}
+
+
+<style>
+    #teacher{
+        background-color:white;
+        padding:5%;
+        width:100%;
+        margin-bottom:5%;
+    }
+
+</style>
+
+{% endblock %}

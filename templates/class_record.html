@@ -1,0 +1,63 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<h2>Make-up class Record</h2>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+{% if class_list != [] %}
+    {% for i in range(class_no) %}
+<div id="leave">
+            <table id="detail">
+                <tr style="background-color: #cceeff;">
+                    <td>Class ID:</td>
+                    <td>{{class_list[i][1]}}</td>
+                </tr>
+
+                <tr>
+                    <td>Student Name:</td>
+                    <td>{{class_list[i][2]}}</td>
+                </tr>
+
+                <tr>
+                    <td>Class Date:</td>
+                    <td>{{class_date[i]}}</td>
+                </tr>
+                <tr>
+                    <td>Class Time:</td>
+                    <td>{{class_start[i]}} - {{class_end[i]}}</td>
+                </tr>
+                <tr>
+                    <td>Course:</td>
+                    <td>{{class_list[i][6]}} (Level: {{class_list[i][7]}})</td>
+                </tr>
+                <tr>
+                    <td>Leave Date:</td>
+                    <td>{{leave_date[i]}} (Leave ID: {{class_list[i][0]}})</td>
+                </tr>
+            </table>
+</div>
+    {% endfor %}
+
+{% else %}
+<p style="text-align: center;">You do not have any mark-up class record!</p>
+{% endif %}
+
+
+<style>
+    #detail{
+        width:80%;
+        margin:auto;
+    }
+
+    #leave{
+        background-color:white;
+        padding:2%;
+        margin:3%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

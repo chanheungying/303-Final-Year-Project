@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block m%}
+<div style="margin-top:100px;">
+    <div style="margin:auto; width:90%;">
+        <div style="height:100%;">
+        <h3>About Distinction Art Music Center</h3>
+        <img src="{{url_for('static', filename = 'musiclearn.jfif')}}" class="rounded" alt="logo" width="30%" id="learn">
+        <p>    Our company, Distinction Art Music Center was founded more than 10 years ago in Tai Po.  The aim of
+            the business is to provide a platform for people to learn music.  People with different age are welcome
+            to learn music in the center.  We have also sponsored some events, including Asia Star Piano Competition.
+            The teachers in the center have already gotten grade 8 or above music instrument certification. Moreover,
+            some teachers have ATCL or above certification.  Therefore, it is believed that we can provide a better
+            learning experience for customers.
+        </p>
+        </div>
+
+        <hr>
+
+        <div style="margin:1%;">
+        <h3>Music Education</h3>
+        <img src="{{url_for('static', filename = 'violin.jpg')}}" class="rounded" alt="logo" width="30%" id="child">
+        <p>   We have provided a range of courses for our customers to learn music, including:</p>
+            <ul>
+                <li>Piano</li>
+                <li>Violin</li>
+                <li>Flute</li>
+                <li>Guitar</li>
+                <li>Clarinet</li>
+                <li>Music theory, etc.</li>
+            </ul>
+            <p>Link: <a href="/instruments">More about the musical instruments</a> </p>
+            <p>*For further more details, please call us at (+853) 2665 7003</p>
+        </div>
+
+    </div>
+</div>
+<style>
+    #learn{
+        float:right;
+        margin:1%;
+    }
+
+    #child{
+        float:right;
+        margin:1%;
+    }
+
+    p{
+        margin-top:2.5%;
+        margin-bottom:5%;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>
+    Adding Course
+</h3>
+<hr>
+
+    {% if staff[1] == 'Male'%}
+    <h3>Teacher: Mr {{staff[0]}}</h3>
+    {% else %}
+    <h2>Teacher: Miss {{staff[0]}}</h2>
+    {% endif %}
+
+<p>*Please choose suitable course time*<br>
+    <b style="color:green">Green</b> = available, <b style="color:red">Red</b> = Not available</p>
+
+{% if result2 != [] %}
+{% for i in range(No):%}
+
+<div id="teacher">
+
+    <h3>Weekday: {{result2[i][5]}}</h3>
+
+
+    <div id="timetable">
+        {% for b in range(Number[i]):%}
+
+        {% if LunchList[i] != '00:00'%}
+            {% for a in range(Student_num) %}
+
+                    {% if result[a][2]==result2[i][4] and result2[i][5]== result[a][4]%}
+                            {% if student_start_time[a]==AllTime[i][b]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                            {% endif%}
+                    {% endif%}
+            {% endfor %}
+
+                    <!--One Hour Lunch for Teachers-->
+                    {% if LunchList[i] == AllTime[i][b] or LunchList2[i]== AllTime[i][b]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                    {% else %}
+                        <form action="/courseinformation" method="post">
+                            <input name="time" type="hidden" value="{{AllTime[i][b]}}">
+                            <input name="teacherid" type="hidden" value="{{result2[i][4]}}">
+                            <input name="course" type="hidden" value="{{result2[i][7]}}">
+                            <input name="weekday" type="hidden" value="{{result2[i][5]}}">
+                            <button class="btn" role="button" type="submit" id="course">{{AllTime[i][b]}}</button>
+                        </form>
+                    {% endif%}
+
+
+        {% else %}
+            {% for a in range(Student_num) %}
+                            {% if result[a][2]==result2[i][4] and student_start_time[a]==AllTime[i][b] and result2[i][5]== result[a][4]%}
+                            <button class="btn" role="button" type="submit" id="nocourse" disabled>
+                                {{AllTime[i][b]}}
+                            </button>
+                            {% endif%}
+            {% endfor %}
+                        <form action="/courseinformation" method="post">
+                            <input name="time" type="hidden" value="{{AllTime[i][b]}}">
+                            <input name="teacherid" type="hidden" value="{{result2[i][4]}}">
+                            <input name="course" type="hidden" value="{{result2[i][7]}}">
+                            <input name="weekday" type="hidden" value="{{result2[i][5]}}">
+                            <button class="btn" role="button" type="submit" id="course">{{AllTime[i][b]}}</button>
+                        </form>
+        {% endif%}
+    {% endfor %}
+
+    </div>
+</div>
+{% endfor %}
+{% else %}
+
+<p id="message">Sorry, no time is available.</p>
+{% endif %}
+
+
+<style>
+    p{
+        font-size:16px;
+        text-align:center;
+        margin:5%;
+    }
+
+    #teacher{
+        background-color:white;
+        padding:5%;
+        width:100%;
+        margin-bottom:5%;
+    }
+
+    #timetable{
+        width:90%;
+        text-align:center;
+        margin:auto;
+        height:150px;
+    }
+
+
+    #course{
+        width:19%;
+        background-color:#33cc33;
+        height:39px;
+        margin:0.25%;
+        float: left;
+        height:auto;
+    }
+
+    #nocourse{
+        width:19%;
+        background-color:#e62e00;
+        height:39px;
+        margin:0.25%;
+        float: left;
+        height:auto;
+    }
+
+    #instrument{
+        font-size:14px;
+        background-color:#99b3ff;
+        margin-left:5%;
+    }
+
+    #message{
+        background-color:white;
+        padding-top:10%;
+        padding-bottom:10%;
+    }
+</style>
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

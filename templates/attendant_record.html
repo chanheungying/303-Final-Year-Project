@@ -1,0 +1,102 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h2>All Attendant Record</h2>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+
+
+<div id="attent">
+    <table style="width:100%; text-align:center; background-color:white;">
+        <tr>
+            <td style="width:33.33%">Course</td>
+            <td style="width:66.66%">Attendant</td>
+        </tr>
+    </table>
+{% if attend == [] %}
+    {% else %}
+    {% for i in range(attend_no) %}
+    <div id="week">
+        <div class="row">
+        <p class="col-4">
+            <b>{{attend[i][3]}} lesson</b><br>
+            <i style="color:grey;">Level: {{attend[i][4]}}</i>
+        </p>
+        <table class="col-8">
+            <tr>
+                <td><b>Lesson Date:</b></td>
+                <td><b>{{course_date[i]}}</b></td>
+            </tr>
+            <tr>
+                <td>Start Time:</td>
+                <td>{{course_time[i]}}</td>
+            </tr>
+            {% if attend[i][5] == None and attend[i][6] == None and attend[i][2] == None %}
+            <tr>
+                <td>Arrival Time:</td>
+                <td style="width:55%;">Not attend yet!</td>
+            </tr>
+            {% else %}
+                {% if attend[i][2] == record_attend %}
+                        <tr>
+                            <td>Arrival Time:</td>
+                            <td style="width:55%;">No leave record, <b>count as attended lesson.</b></td>
+                        </tr>
+                {% else %}
+                        {% if attend[i][5] != None %}
+                            {% if attend[i][6] != None and attend[i][2] == None %}
+                            {% for a in range(class_no) %}
+                                {% if attend[i][6] == class_id[a][0] %}
+                                <tr>
+                                    <td>Arrival Time:</td>
+                                    <td style="width:55%;">
+                                        Make-up class time:<br>
+                                        {{class_date[a]}}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <tr>
+                                <td>Arrival Time:</td>
+                                <td style="width:55%;">Have applied for personal leave.</td>
+                            </tr>
+                            {% endif %}
+                        {% else %}
+                        <tr>
+                            <td>Arrival Time:</td>
+                            <td style="width:55%;">{{attend[i][2]}}</td>
+                        </tr>
+                        {% endif %}
+                {% endif %}
+            {% endif %}
+        </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<style>
+    #attent{
+        margin-top:10%;
+        margin-bottom:10%;
+    }
+
+    #week{
+        background-color:white;
+        width:100%;
+        margin-bottom:3%;
+        text-align:left;
+        border-collapse: collapse;
+        padding:3%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

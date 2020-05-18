@@ -1,0 +1,81 @@
+{% extends 'base3.html' %}
+{% block staff %}
+<h3>Income this month:</h3>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ffcc99; margin-bottom:5%;">Back</a><br>
+<p>Total Salary: HKD {{total_salary}}</p>
+<label for="searching" style="margin-right:5%;">Searching:</label>
+<input id="searching" type="text" placeholder="Searching..">
+
+        <div id="attend">
+                <table>
+                    <thead>
+                          <tr>
+                              <th>Course</th>
+                              <th>Level</th>
+                              <th>Price</th>
+                              <th>No.</th>
+                              <th>Total</th>
+                          </tr>
+                    </thead>
+                    <tbody id="student_information">
+                          {% for i in range(salary_no) %}
+                          <tr>
+                              <td>{{salary_list[i][0]}}</td>
+                              <td>{{salary_list[i][1]}}</td>
+                              <td>{{salary_list[i][2]}}</td>
+                              <td>{{salary_list[i][3]}}</td>
+                              <td>{{total_list[i]}}</td>
+                          </tr>
+                          {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+
+
+
+<style>
+    table{
+        width:100%;
+        margin:auto;
+    }
+
+    #attend{
+        padding:5%;
+        background-color:white;
+        margin-bottom:10%;
+    }
+
+    #make-up-class{
+        padding:5%;
+        background-color:#e6e6ff;
+        margin-bottom:10%;
+    }
+
+    #take{
+        background-color:#ccccff;
+        width:100%;
+        margin-top:3%;
+    }
+
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+<script>
+$(document).ready(function(){
+  $("#searching").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#student_information tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+
+{% endblock %}

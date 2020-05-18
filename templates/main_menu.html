@@ -1,0 +1,37 @@
+{% extends 'base3.html' %}
+{% block staff %}
+
+<div id="outlayer" style="margin-top:75px;">
+    <div style="margin:auto; width:90%;">
+        <h3>Hello, {{result[1]}}</h3>
+        <hr>
+        <h5>Please choose a function:</h5>
+        <a href="/add_teacher" class="btn" id="function1">Add new teacher</a>
+        <a href="/take_attendance" class="btn" id="function2">Take attendance</a>
+        <a href="/make_invoice" class="btn" id="function3">Pay Lesson Fee</a>
+        <a href="/teacher_leave_approval" class="btn" id="function4">Leave Approval (Teacher)</a>
+        <a href="/income" class="btn" id="function5">Check Total Income</a>
+        <a href="/notice" class="btn" id="function6">Give notice</a>
+        <a href="/contact_teacher_id" class="btn" id="function7">Student Contact Information</a>
+    </div>
+</div>
+
+<style>
+        #function1, #function2, #function3,
+        #function4,  #function5, #function6,
+        #function7{
+            width:100%;
+            background-color:white;
+            margin-bottom:3%;
+            margin-top:1%;
+            padding:3%;
+        }
+
+        #outlayer{
+            background-color: #e6f7ff;
+        }
+
+
+</style>
+
+{% endblock %}

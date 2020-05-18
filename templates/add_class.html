@@ -1,0 +1,75 @@
+{% extends 'teacherbase.html' %}
+{% block staff %}
+<a href="/timetable" class="btn" id="back">Back</a>
+<div id="show">
+    <h2 style="margin-bottom:7%;">Add Make-up class</h2>
+    <div id="detail">
+        <form action="/adding_class" method="post">
+
+        Make-up class time:<br>
+            {% if leave_list != [] %}
+                    <select name="class_time">
+                        {% for i in range(leave_no) %}
+                        <option value="{{leave_list[i][0]}}">
+                            {{leave_date[i]}} {{leave_time[i]}}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+            {% else %}
+            <b>No time is available for make-up class!</b>
+            {% endif %}
+
+
+
+        <br>
+        Leave lesson:<br>
+        {% if class_list != [] %}
+                <select name="leave_id">
+                    {% for i in range(class_no) %}
+                    <option value="{{class_list[i][2]}}">
+                        {{class_list[i][0]}}: {{class_date[i]}} ({{class_list[i][6]}}: {{class_list[i][5]}})
+                    </option>
+                    {% endfor %}
+                </select>
+        {% else %}
+            <b>No student need make-up class!</b>
+        {% endif %}
+
+    {% if leave_list != [] and class_list != [] %}
+        <button type="submit" class="btn btn-success" id="level1">Add Class</button>
+    {% else %}
+        <button type="submit" class="btn btn-success" id="level2" disabled>Add Class</button>
+    {% endif %}
+        </form>
+    </div>
+</div>
+
+<style>
+    #detail{
+        width:80%;
+        margin:auto;
+    }
+
+    #show{
+        margin:auto;
+        background-color:white;
+        padding:7%;
+        width:90%;
+    }
+
+    #back{
+        background-color:#b3c6ff;
+        margin-bottom:5%;
+    }
+
+    #level1, #level2{
+        width: 100%;
+        margin-top:5%;
+    }
+
+    tr{
+        height:30px;
+    }
+</style>
+{% endblock %}

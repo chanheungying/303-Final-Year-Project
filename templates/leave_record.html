@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h2>Personal Leave Record</h2>
+<hr>
+<a class="btn" onclick="Back()" style="background-color:#ccccff; margin-bottom:5%;">Back</a>
+{% if course_list != [] %}
+    {% for i in range(num) %}
+    <div id="leave">
+        <table id="information">
+            <tr>
+                <td>Leave time:</td>
+                <td>{{course_list[i][0]}}</td>
+            </tr>
+            <tr>
+                <td>Course:</td>
+                <td>{{course_list[i][4]}} ({{course_list[i][5]}})</td>
+            </tr>
+            <tr>
+                <td>Reason:</td>
+                <td>{{course_list[i][1]}}</td>
+            </tr>
+            <tr>
+                <td>Need Class? </td>
+                <td>{{course_list[i][2]}}</td>
+            </tr>
+            <tr>
+                <td>Approval:</td>
+                <td>{{course_list[i][3]}}</td>
+            </tr>
+        </table>
+    </div>
+    {% endfor %}
+
+{% else %}
+<p style="text-align: center;">You do not have any personal leave record!</p>
+{% endif %}
+
+<style>
+    #leave{
+        background-color:white;
+        padding:2%;
+        margin:3%;
+    }
+
+    #information{
+        width:100%;
+    }
+</style>
+
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+
+{% endblock %}

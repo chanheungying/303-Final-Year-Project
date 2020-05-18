@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block m%}
+
+    {% if error != None %}
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Error!</strong> {{error}}
+    </div>
+    {% else %}
+    {% endif %}
+
+    <div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#" data-slide-to="0" class="active"></li>
+    <li data-target="#" data-slide-to="1"></li>
+    <li data-target="#" data-slide-to="2"></li>
+  </ul>
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <a href="/instrument"><img src="{{url_for('static', filename = 'Learn.jpg')}}" alt="Learn Music">
+          <h3 class="centered">Click here to know more about course</h3></a>
+    </div>
+    <div class="carousel-item">
+      <img src="{{url_for('static', filename = 'Contact.jpg')}}" alt="Contact Us" >
+    </div>
+    <div class="carousel-item">
+      <img src="{{url_for('static', filename = 'ComingEvents.jpg')}}" alt="Coming Events">
+    </div>
+  </div>
+
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+</div>
+    <section style="width:90%; margin:auto;">
+        <div id="news">
+        <h2>News</h2>
+        <hr>
+       <div class="row" style="margin-top:3%;">
+            <div class="col-6 col-lg-3" style="margin-bottom:3%;">
+                <img src="{{url_for('static', filename = 'announce.jpg')}}" class="rounded" alt="Competitions" width="100%">
+                <h3 id="announce">Notice</h3>
+            </div>
+            <div class="col-6 col-lg-3">
+                <img src="{{url_for('static', filename = 'event.jfif')}}" class="rounded" alt="Achievement" width="100%">
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <img src="{{url_for('static', filename = 'Competition.jpg')}}" class="rounded" alt="Competitions" width="100%">
+                <h3 id="competition">Music Competitions</h3>
+            </div>
+            <div class="col-6 col-lg-3">
+                <img src="{{url_for('static', filename = 'achievement.jpeg')}}" class="rounded" alt="Achievement" width="100%">
+                <h3 id="achieve">Achievements</h3>
+            </div>
+        </div>
+        </div>
+
+        <div id="about">
+        <h2>About Us</h2>
+        <hr>
+        <div class="row" style="margin-top:3%;">
+            <div class="col-6 col-lg-3 img1" style="margin-bottom:3%;">
+                <a href="/aboutus"><img src="{{url_for('static', filename = 'business.jpeg')}}" class="rounded" alt="Our Business" width="100%" >
+                <h3 id="intro">Our Business</h3></a>
+            </div>
+            <div class="col-6 col-lg-3 img2" style="margin-bottom:3%;">
+                <a href="/instrument"><img src="{{url_for('static', filename = 'instrument.jpg')}}" class="rounded" alt="instruments" width="100%">
+                <h3 id="instruments">Instruments</h3></a>
+            </div>
+
+            <div class="col-6 col-lg-3 img1" style="margin-bottom:3%;">
+                <a href=""><img src="{{url_for('static', filename = 'join.jpg')}}" class="rounded" alt="Our Business" width="100%" height="90%">
+                </a>
+            </div>
+            <div class="col-6 col-lg-3 img2" style="margin-bottom:3%;">
+                <a href=""><img src="{{url_for('static', filename = 'qa.jfif')}}" class="rounded" alt="Q & A" width="100%" >
+                </a>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <style>
+
+
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-inner{
+            width:90%;
+            height:100%;
+            margin:auto;
+        }
+
+        hr{
+            width:100%;
+            margin:auto;
+        }
+
+        .centered {
+            position: absolute;
+            top: 30%;
+            left: 60%;
+            color:white;
+            font-size:120%;
+            width:30%;
+        }
+
+        #competition{
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            color:Black;
+            font-size:100%;
+            width:30%;
+        }
+
+
+        #achieve,#intro{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color:white;
+            font-size:150%;
+            transform: translate(-50%, -50%);
+        }
+
+        #announce{
+            position: absolute;
+            top: 45%;
+            left: 60%;
+            font-size:150%;
+            transform: translate(-50%, -50%);
+        }
+
+        #instruments{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            color:white;
+            font-size:150%;
+            transform: translate(-50%, -50%);
+        }
+
+        #news,#about{
+            background-color:white;
+            padding:3%;
+            margin-top:5%;
+        }
+
+    </style>
+
+{% endblock %}

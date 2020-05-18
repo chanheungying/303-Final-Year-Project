@@ -1,0 +1,189 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h2>My Lesson</h2>
+<hr>
+{% if course_list != [] %}
+<a id="adding" class="btn" href="/add_method" style="float: right;">Add Course</a>
+{% for i in range(No) %}
+<form action="/my_lesson" method="post">
+    <input type="hidden" name="course_id" value="{{course_list[i][1]}}">
+    <button type="submit" id="instrument" class="btn">{{course_list[i][0]}} lesson</button>
+
+</form>
+{% endfor %}
+
+{% else %}
+    <p>You do not have any lesson yet! Please add a course</p>
+    <a id="adding" class="btn" href="add_method">Add Course</a>
+{% endif %}
+
+
+<div id="takeattend">
+    <h2>Take Attendance</h2>
+    <hr>
+    <div id="card">
+        <table id="student">
+            <tr>
+                <td>Student ID:</td>
+                <td> {{result[0]}}</td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>{{result[1]}}</td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div id="barcode">
+        <p>* Please show bar code to the staff before having lessons</p>
+        <svg id="code"></svg>
+    </div>
+
+
+</div>
+
+<div id="attent">
+    <h2>Recent Attendant Record</h2>
+    <hr>
+    <table style="width:100%; text-align:center; background-color:white;">
+        <tr>
+            <td style="width:33.33%">Course</td>
+            <td style="width:66.66%">Attendant</td>
+        </tr>
+    </table>
+{% if attend == [] %}
+    {% else %}
+    {% for i in range(attend_no) %}
+    <div id="week">
+        <div class="row">
+        <p class="col-4">
+            <b>{{attend[i][3]}} lesson</b><br>
+            <i style="color:grey;">Level: {{attend[i][4]}}</i>
+        </p>
+        <table class="col-8">
+            <tr>
+                <td><b>Lesson Date:</b></td>
+                <td><b>{{course_date[i]}}</b></td>
+            </tr>
+            <tr>
+                <td>Start Time:</td>
+                <td>{{course_time[i]}}</td>
+            </tr>
+            {% if attend[i][5] == None and attend[i][6] == None and attend[i][2] == None %}
+            <tr>
+                <td>Arrival Time:</td>
+                <td style="width:55%;">Not attend yet!</td>
+            </tr>
+            {% else %}
+                {% if attend[i][2] == record_attend %}
+                        <tr>
+                            <td>Arrival Time:</td>
+                            <td style="width:55%;">No leave record, <b>count as attended lesson.</b></td>
+                        </tr>
+                {% else %}
+                        {% if attend[i][5] != None %}
+                            {% if attend[i][6] != None and attend[i][2] == None %}
+                            <tr>
+                                <td>Arrival Time:</td>
+                                <td style="width:55%;">Not attend, teacher have arranged make-up class.</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td>Arrival Time:</td>
+                                <td style="width:55%;">Have applied for personal leave.</td>
+                            </tr>
+                            {% endif %}
+                        {% else %}
+                        <tr>
+                            <td>Arrival Time:</td>
+                            <td style="width:55%;">{{attend[i][2]}}</td>
+                        </tr>
+                        {% endif %}
+                {% endif %}
+            {% endif %}
+        </table>
+        </div>
+    </div>
+    {% endfor %}
+    <a class="btn" id="more" href="/attendant_record">More Record</a>
+</div>
+{% endif %}
+
+<style>
+    #attent, #takeattend{
+        margin-top:10%;
+        margin-bottom:10%;
+    }
+
+    #weekday{
+        background-color:#999999;
+        border: 1px solid black;
+    }
+
+    #week{
+        background-color:white;
+        width:100%;
+        margin-bottom:3%;
+        text-align:left;
+        border-collapse: collapse;
+        padding:3%;
+    }
+
+    #student{
+        width:80%;
+        margin:auto;
+        text-align:left;
+    }
+
+    #card{
+        width:90%;
+        background-color:white;
+        padding:3%;
+        margin: auto;
+    }
+
+
+    #adding{
+        margin-left:5%;
+        padding:1.5%;
+        background-color:#cc99ff;
+        color:white;
+    }
+
+    #more{
+        float:right;
+        margin-top:2%;
+        padding:1%;
+        background-color:#cc99ff;
+        color:white;
+    }
+
+    svg {
+        width:100%;
+    }
+
+    #barcode{
+        background-color:white;
+        width:90%;
+        margin:auto;
+        padding:3%;
+        text-align:center;
+    }
+
+    #instrument{
+        margin:1%;
+        background-color:#33cc33;
+        color:white;
+    }
+</style>
+
+<script>
+    JsBarcode("#code", {{result[0]}}, {
+        displayValue: false,
+        height: 70,
+        width: 6
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+{% block login %}
+<h3  style="text-align:center;">Course Information ({{course_list[0]}})</h3>
+<hr>
+<button onclick="Back()" class="btn" id="back"> Back</button>
+<div id="course-back">
+    <table id="course">
+         <tr>
+            <td>Course Type: </td>
+            <td>{{course_list[0]}}</td>
+        </tr>
+        <tr>
+            <td>Level: </td>
+            <td>{{level[0]}}</td>
+        </tr>
+        <tr>
+            <td>Time: </td>
+            <td>{{start}} - {{end}}</td>
+        </tr>
+        <tr>
+            <td>Weekday: </td>
+            <td>{{course_list[4]}}</td>
+        </tr>
+        <tr>
+            <td>Teacher</td>
+            {% if course_list[5] == 'Male'%}
+            <td>Mr {{course_list[6]}}</td>
+            {% else %}
+            <td>Miss {{course_list[6]}}</td>
+            {% endif %}
+        </tr>
+    </table>
+</div>
+
+<style>
+    #course-back{
+        background-color:white;
+        margin: auto;
+        width:100%;
+        padding:5%;
+    }
+
+    #course{
+        width:95%;
+    }
+
+    #back{
+        margin-bottom:3%;
+        background-color:#b3b3ff;
+    }
+</style>
+<script>
+function Back() {
+  window.history.back();
+}
+</script>
+{% endblock %}

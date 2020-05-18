@@ -1,0 +1,115 @@
+{% extends 'base2.html' %}
+{% block login %}
+
+<h3>Account Information</h3>
+<img id="user" src="{{url_for('static', filename = 'user.png')}}" alt="account" style="margin-top:3%;">
+<form action="/changed" method="POST"  onsubmit="return validation()" name="Change">
+<table>
+
+    <tr>
+        <td>Student ID:</td>
+        <td>{{result[0]}}</td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text" value="{{result[1]}}" name="UserName"></td>
+    </tr>
+    <tr>
+        <td>Gender:</td>
+        <td>{{result[2]}}</td>
+    </tr>
+    <tr>
+        <td>Phone:</td>
+        <td><input type="number" name="phone" value="{{result[3]}}" required></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="email" name="email" value="{{result[4]}}" required></td>
+    </tr>
+    <tr>
+        <td>Address:</td>
+        <td><input type="text" name="address" value="{{result[5]}}"></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input type="password" name="pwd" value="{{result[6]}}"></td>
+    </tr>
+
+</table>
+
+<button type="submit" id="change">Change Information</button>
+</form>
+
+<script type="text/javascript">
+       function validation(){
+        var Name = document.forms["Change"]["UserName"].value
+        var Phone = document.forms["Change"]["phone"].value
+        var Password = document.forms["Change"]["pwd"].value
+        var RetypePwd = document.forms["Change"]["confirmPwd"].value
+
+        if (Name.length < 3 ) {
+          alert("The length of name must longer than 2");
+          return false;
+        }
+
+        else if (Phone.length < 8 ) {
+          alert("Invalid phone number");
+          return false;
+        }
+
+        else if (Password !== RetypePwd ) {
+          alert("Password is not the same as the retyped one");
+          return false;
+        }
+
+       }
+</script>
+
+<style>
+
+    #account{
+        margin-bottom:5%;
+    }
+
+
+     table{
+        margin: auto;
+        width:70%;
+    }
+
+    td{
+        width:50%;
+    }
+
+    input[type='text'],
+    input[type='number'],
+    input[type='email'],
+    input[type='password']{
+        width:95%;
+    }
+
+    #change{
+        margin-top:5%;
+        margin-left:30%;
+        width:40%;
+        background-color: #ffb366;
+        padding:1.5%
+    }
+
+    #out{
+        margin-top:3%;
+        margin-left:30%;
+        width:40%;
+        background-color: #33cc33;
+        padding:1.5%
+    }
+
+    #user{
+        width:50%;
+        margin-left:25%;
+    }
+
+
+</style>
+
+{% endblock %}
